@@ -7,12 +7,29 @@ export class BaseAssertion<V> implements IAssertion {
 
   protected _assertTrue: boolean = true;
 
+  protected get value(): V {
+    return this._value;
+  }
+
+  protected get assertTrue(): boolean {
+    return this._assertTrue;
+  }
+
+  protected get expectString(): string {
+    return `Expected "${this.value}" ${this.assertTrue ? "" : "NOT"}`;
+  }
+
   constructor(value: V) {
     this._value = value;
   }
 
+  protected assert(assertion: boolean, message: string, data?: IAssertionData) {
+    if (!assertion) {
+      throw new AssertionError(message, data);
+    }
+  }
+
   public get is(): this {
-    this._assertTrue = true;
     return this;
   }
 
@@ -22,7 +39,6 @@ export class BaseAssertion<V> implements IAssertion {
   }
 
   public get has(): this {
-    this._assertTrue = true;
     return this;
   }
 
@@ -39,15 +55,6 @@ export class BaseAssertion<V> implements IAssertion {
     return this;
   }
 
-  public get the(): this {
-    return this;
-  }
-
-  public get no(): this {
-    this._assertTrue = false;
-    return this;
-  }
-
   public get does(): this {
     this._assertTrue = true;
     return this;
@@ -58,28 +65,19 @@ export class BaseAssertion<V> implements IAssertion {
     return this;
   }
 
-  public get value(): V {
-    return this._value;
+  public get the(): this {
+    return this;
   }
 
-  public get assertTrue(): boolean {
-    return this._assertTrue;
+  public get no(): this {
+    this._assertTrue = false;
+    return this;
   }
 
   public get not(): this {
     this._assertTrue = !this._assertTrue;
 
     return this;
-  }
-
-  protected get expectString(): string {
-    return `Expected "${this.value}" ${this.assertTrue ? "" : "NOT"}`;
-  }
-
-  protected assert(assertion: boolean, message: string, data?: IAssertionData) {
-    if (!assertion) {
-      throw new AssertionError(message, data);
-    }
   }
 
   public null() {
@@ -103,11 +101,19 @@ export class BaseAssertion<V> implements IAssertion {
     );
   }
 
+  public exist() {
+    this.exists();
+  }
+
   public exists() {
     this.assert(
       (this.value !== undefined && this.value !== null) === this.assertTrue,
       `${this.expectString} to be "defined".`,
     );
+  }
+
+  public equals(value: unknown) {
+    this.equalTo(value);
   }
 
   public equalTo(value: unknown) {
@@ -117,11 +123,7 @@ export class BaseAssertion<V> implements IAssertion {
     );
   }
 
-  public exist() {
-    this.exists();
-  }
-
-  toString() {
+  public toString() {
     return String(this.value);
   }
 }

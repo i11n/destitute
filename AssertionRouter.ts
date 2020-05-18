@@ -1,6 +1,8 @@
 import { IAssertion, IConstructor } from "./types.ts";
 import { BaseAssertion } from "./assertions/BaseAssertion.ts";
 import { NumberAssertion } from "./assertions/NumberAssertion.ts";
+import { BooleanAssertion } from "./assertions/BooleanAssertion.ts";
+import { StringAssertion } from "./assertions/StringAssertion.ts";
 
 export module AssertionRouter {
   export type AssertionRoute = [
@@ -16,9 +18,7 @@ export module AssertionRouter {
       if (routeClass === Class) {
         throw new Error(
           `A route matching "${
-            typeof Class === "string"
-              ? Class
-              : Class.name
+            typeof Class === "string" ? Class : Class.name
           }" is already mapped to "${assertion.name}". Use "setRoute()" to override.`,
         );
       }
@@ -55,9 +55,7 @@ export module AssertionRouter {
     if (!foundRoute) {
       throw new Error(
         `No route matching "${
-          typeof Class === "string"
-            ? Class
-            : Class.name
+          typeof Class === "string" ? Class : Class.name
         }" was found. Use "addRoute()" or "spliceRoute()" instead.`,
       );
     }
@@ -82,15 +80,13 @@ export module AssertionRouter {
 
     throw new Error(
       `No route matching "${
-        typeof valueType === "string"
-          ? valueType
-          : valueType.name
+        typeof valueType === "string" ? valueType : valueType.name
       }" for value (${value}) was found.`,
     );
   }
 
   addRoute("base", BaseAssertion); //  handles undefined and null
-  //addRoute("boolean", BooleanAssertion);  //  handles booleans
+  addRoute("boolean", BooleanAssertion);  //  handles booleans
   addRoute("number", NumberAssertion); //  handles number
-  //addRoute("string", StringAssertion);  //  handles strings
+  addRoute("string", StringAssertion);  //  handles strings
 }
