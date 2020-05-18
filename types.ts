@@ -1,9 +1,8 @@
 export interface IConstructor<T> {
-  new(...args: any[]): T;
+  new (...args: any[]): T;
 }
 
 export interface IAssertion {
-  
 }
 
 export interface IAssertionData {

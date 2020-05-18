@@ -1,3 +1,4 @@
+import { equal } from "https://deno.land/std/testing/asserts.ts";
 import { IAssertion, IAssertionData } from "../types.ts";
 import { AssertionError } from "../AssertionError.ts";
 
@@ -71,37 +72,48 @@ export class BaseAssertion<V> implements IAssertion {
     return this;
   }
 
+  protected get expectString(): string {
+    return `Expected "${this.value}" ${this.assertTrue ? "" : "NOT"}`;
+  }
+
   protected assert(assertion: boolean, message: string, data?: IAssertionData) {
     if (!assertion) {
       throw new AssertionError(message, data);
     }
   }
-  
+
   public null() {
     this.assert(
       (this.value === null) === this.assertTrue,
-      `Expected ${this}${this.assertTrue ? " " : " not "}to be "null".`,
+      `${this.expectString} to be "null".`,
     );
   }
 
   public defined() {
     this.assert(
       (this.value !== undefined) === this.assertTrue,
-      `Expected ${this}${this.assertTrue ? " " : " not "}to be defined.`,
+      `${this.expectString} to be "defined".`,
     );
   }
 
   public truthy() {
     this.assert(
       (!!this.value === true) === this.assertTrue,
-      `Expected ${this}${this.assertTrue ? " " : " not "}to be defined.`,
+      `${this.expectString} to be "truthy".`,
     );
   }
 
   public exists() {
     this.assert(
       (this.value !== undefined && this.value !== null) === this.assertTrue,
-      `Expected ${this}${this.assertTrue ? " " : " not "}to be defined.`,
+      `${this.expectString} to be "defined".`,
+    );
+  }
+
+  public equalTo(value: unknown) {
+    this.assert(
+      equal(this.value, value) === this.assertTrue,
+      `${this.expectString} to equal "${value}".`,
     );
   }
 

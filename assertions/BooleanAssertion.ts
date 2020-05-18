@@ -4,7 +4,7 @@ export class BooleanAssertion extends BaseAssertion<Boolean> {
   public true() {
     this.assert(
       this.value === this.assertTrue,
-      `Expected ${this}${this.assertTrue ? " " : " NOT "}to be "true".`
+      `${this.expectString} to be "true".`,
     );
   }
 }
