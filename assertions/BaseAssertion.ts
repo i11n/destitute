@@ -2,7 +2,7 @@ import { equal } from "https://deno.land/std/testing/asserts.ts";
 import { IAssertion, IAssertionData } from "../types.ts";
 import { AssertionError } from "../AssertionError.ts";
 
-export class BaseAssertion<V> implements IAssertion {
+export class BaseAssertion<V = any> implements IAssertion {
   protected _value: V;
 
   protected _assertTrue: boolean = true;
@@ -39,6 +39,10 @@ export class BaseAssertion<V> implements IAssertion {
   }
 
   public get has(): this {
+    return this;
+  }
+
+  public get have(): this {
     return this;
   }
 
@@ -110,6 +114,10 @@ export class BaseAssertion<V> implements IAssertion {
       (this.value !== undefined && this.value !== null) === this.assertTrue,
       `${this.expectString} to be "defined".`,
     );
+  }
+
+  public equal(value: unknown) {
+    this.equalTo(value);
   }
 
   public equals(value: unknown) {

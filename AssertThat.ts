@@ -22,10 +22,8 @@ import { IAssertion } from "./types.ts";
  * ```
  * @param value The value to test.
  */
-export function AssertThat<T extends IAssertion>(value: unknown): any {
-  const Assertion = AssertionRouter.matchRoute(value);
+export function AssertThat<T extends IAssertion = any>(value: unknown): T {
+  const Assertion= AssertionRouter.matchRoute(value);
 
-  return new Assertion(value) as any;
+  return new Assertion(value) as T;
 }
-
-AssertThat;
