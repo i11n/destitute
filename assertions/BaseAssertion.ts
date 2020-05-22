@@ -1,6 +1,6 @@
 import { equal } from "https://deno.land/std/testing/asserts.ts";
-import { IAssertion, IAssertionData } from "../types.ts";
 import { AssertionError } from "../AssertionError.ts";
+import { IAssertion, IAssertionData } from "../types.ts";
 
 export class BaseAssertion<V = any> implements IAssertion {
   protected _value: V;
@@ -222,6 +222,54 @@ export class BaseAssertion<V = any> implements IAssertion {
       equal(this.value, expected) === this.assertTrue,
       `${this.expectString} to equal "${expected}".`,
     );
+  }
+
+  /**
+   * Asserts that the test `value` meets all of the assertion `callbacks`.
+   * 
+   * **NOTE: negation is currently not supported. Use negation in the callbacks.**
+   * 
+   * @param callbacks The assertion callback to test.
+   */
+  public meetsAll(...callbacks: ((assertable: this) => void)[]) {
+    for (let i = 0; i < callbacks.length; i++) {
+      try {
+        callbacks[i](this);
+      } catch (e) {
+        throw new AssertionError(
+          `${this.expectString} to meet all assertions. Failed on assertion ${i + 1} with message: ${e.message}`,
+        );
+      }
+    }
+  }
+
+  /**
+   * Asserts that the test `value` meets any of the assertion `callbacks`.
+   * 
+   * **NOTE: negation is currently not supported. Use negation in the callbacks.**
+   * 
+   * @param callbacks The assertion callback to test.
+   */
+  public meetsAny(...callbacks: ((assertable: this) => void)[]) {
+    let foundOne = false;
+
+    for (let i = 0; i < callbacks.length; i++) {
+      try {
+        callbacks[i](this);
+
+        foundOne = true;
+
+        break;
+      } catch (e) {
+        continue;
+      }
+    }
+
+    if (!foundOne) {
+      throw new AssertionError(
+        `${this.expectString} to meet at least one assertion.`,
+      );
+    }
   }
 
   /**

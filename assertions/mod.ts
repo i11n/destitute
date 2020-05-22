@@ -2,6 +2,7 @@ export * from "./ArrayAssertion.ts";
 export * from "./BaseAssertion.ts";
 export * from "./BooleanAssertion.ts";
 export * from "./FunctionAssertion.ts";
+export * from "./FunctionSpyAssertion.ts";
 export * from "./MapAssertion.ts";
 export * from "./NumberAssertion.ts";
 export * from "./ObjectAssertion.ts";

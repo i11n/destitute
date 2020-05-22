@@ -2,6 +2,7 @@ import { AssertThat } from "../mod.ts";
 import { BooleanAssertion } from "./BooleanAssertion.ts";
 import { StringAssertion } from "./StringAssertion.ts";
 import { BaseAssertion } from "./BaseAssertion.ts";
+import { NumberAssertion } from "./NumberAssertion.ts";
 
 Deno.test("BaseAssertion chaining", () => {
   AssertThat<BooleanAssertion>(true).is.true();
@@ -53,4 +54,22 @@ Deno.test("BaseAssertion - equalTo", () => {
   AssertThat(25).is.equalTo(25);
   AssertThat("hello").is.not.equalTo("world");
   //  more tests here for the different types to check
+});
+
+Deno.test("BaseAssertion - meetsAll", () => {
+  AssertThat<NumberAssertion>(25).meetsAll(
+    (it) => it.is.lt(30),
+    (it) => it.equals(25),
+    (it) => it.is.gte(25),
+    (it) => it.is.an.int(),
+  );
+});
+
+Deno.test("BaseAssertion - meetsAny", () => {
+  AssertThat<NumberAssertion>(25).meetsAny(
+    (it) => it.is.lt(10),
+    (it) => it.equals(26),
+    (it) => it.is.gte(50),
+    (it) => it.is.an.int(),
+  );
 });

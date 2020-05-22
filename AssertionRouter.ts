@@ -3,6 +3,9 @@ import { BaseAssertion } from "./assertions/BaseAssertion.ts";
 import { NumberAssertion } from "./assertions/NumberAssertion.ts";
 import { BooleanAssertion } from "./assertions/BooleanAssertion.ts";
 import { StringAssertion } from "./assertions/StringAssertion.ts";
+import { ArrayAssertion, ObjectAssertion, FunctionAssertion, MapAssertion, SetAssertion } from "./mod.ts";
+import { FunctionSpy } from "./util/FunctionSpy.ts";
+import { FunctionSpyAssertion } from "./assertions/FunctionSpyAssertion.ts";
 
 export module AssertionRouter {
   export type AssertionRoute = [
@@ -85,8 +88,14 @@ export module AssertionRouter {
     );
   }
 
-  addRoute("base", BaseAssertion); //  handles undefined and null
-  addRoute("boolean", BooleanAssertion);  //  handles booleans
-  addRoute("number", NumberAssertion); //  handles number
-  addRoute("string", StringAssertion);  //  handles strings
+  addRoute("base", BaseAssertion);              //  handles undefined and null
+  addRoute("boolean", BooleanAssertion);        //  handles booleans
+  addRoute("number", NumberAssertion);          //  handles number
+  addRoute("string", StringAssertion);          //  handles strings
+  addRoute(Object, ObjectAssertion);            //  handles object
+  addRoute(Array, ArrayAssertion);              //  handles arrays
+  addRoute(Set, SetAssertion);                  //  handles sets
+  addRoute(Map, MapAssertion);                  //  handles maps
+  addRoute(Function, FunctionAssertion);        //  handles function
+  addRoute(FunctionSpy, FunctionSpyAssertion);  //  handles function spys
 }

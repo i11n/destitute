@@ -1,7 +1,7 @@
 import { BaseAssertion } from "./BaseAssertion.ts";
 import { IConstructor } from "../types.ts";
 
-export class FunctionAssertion extends BaseAssertion<Function> {
+export class FunctionSpyAssertion extends BaseAssertion<Function> {
 
   public throw(ErrorClass?: IConstructor<Error>, message?: string) {
 

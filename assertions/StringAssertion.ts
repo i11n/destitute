@@ -40,4 +40,28 @@ export class StringAssertion extends BaseAssertion<string> {
       `${this.expectString} to have a length of "${num}".`,
     );
   }
+  
+  /**
+   * Asserts whether the test `value` appearing before `str` alphabetically, is expected.
+   * 
+   * @param str The string to test whether the `value` is before alphabetically.
+   */
+  public before(str: string) {
+    this.assert(
+      (this.value < str) === this.assertTrue,
+      `${this.expectString} to be before "${str}.`,
+    )
+  }
+  
+  /**
+   * Asserts whether the test `value` appearing after `str` alphabetically, is expected.
+   * 
+   * @param str The string to test whether the `value` is after alphabetically.
+   */
+  public after(str: string) {
+    this.assert(
+      (this.value > str) === this.assertTrue,
+      `${this.expectString} to be before "${str}.`,
+    )
+  }
 }
