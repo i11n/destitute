@@ -6,6 +6,7 @@ import { StringAssertion } from "./assertions/StringAssertion.ts";
 import { ArrayAssertion, ObjectAssertion, FunctionAssertion, MapAssertion, SetAssertion } from "./mod.ts";
 import { FunctionSpy } from "./util/FunctionSpy.ts";
 import { FunctionSpyAssertion } from "./assertions/FunctionSpyAssertion.ts";
+import { AsyncFunctionAssertion } from "./assertions/AsyncFunctionAssertion.ts";
 
 export module AssertionRouter {
   export type AssertionRoute = [
@@ -96,6 +97,8 @@ export module AssertionRouter {
   addRoute(Array, ArrayAssertion);              //  handles arrays
   addRoute(Set, SetAssertion);                  //  handles sets
   addRoute(Map, MapAssertion);                  //  handles maps
+  const asyncFn = async () => await new Promise(resolve => resolve(true));
+  addRoute(asyncFn.constructor as IConstructor<any>, AsyncFunctionAssertion);      //  handles async function
   addRoute(Function, FunctionAssertion);        //  handles function
   addRoute(FunctionSpy, FunctionSpyAssertion);  //  handles function spys
 }

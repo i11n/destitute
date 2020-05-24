@@ -1,4 +1,5 @@
 export * from "./ArrayAssertion.ts";
+export * from "./AsyncFunctionAssertion.ts";
 export * from "./BaseAssertion.ts";
 export * from "./BooleanAssertion.ts";
 export * from "./FunctionAssertion.ts";

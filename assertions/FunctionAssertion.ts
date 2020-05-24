@@ -59,24 +59,6 @@ export class FunctionAssertion extends BaseAssertion<Function> {
     }
   }
 
-  public async throwAsync(ErrorClass?: IConstructor<Error>, messageIncludes?: string | RegExp) {
-    try {
-      await this.value();
-      this.checkThrown(false, undefined, ErrorClass, messageIncludes);
-    } catch (e) {
-      this.checkThrown(true, e, ErrorClass, messageIncludes);
-    }
-  }
-
-  public async throwWithAsync(args: unknown[], ErrorClass?: IConstructor<Error>, messageIncludes?: string | RegExp) {
-    try {
-      await this.value(...args);
-      this.checkThrown(false, undefined, ErrorClass, messageIncludes);
-    } catch (e) {
-      this.checkThrown(true, e, ErrorClass, messageIncludes);
-    }
-  }
-
   // public return<T extends IAssertion = any>(callback: (assertion: T) => void) {
   // }
 
