@@ -1,10 +1,19 @@
-import { IConstructor } from "../types.ts";
-import { AssertionError } from "../AssertionError.ts";
+import { IConstructor } from "../util/types.ts";
 import { FunctionAssertion } from "./FunctionAssertion.ts";
 
+/**
+ * An assertion class that tests async functions.
+ */
 export class AsyncFunctionAssertion extends FunctionAssertion {
-
-  public async throw(ErrorClass?: IConstructor<Error>, messageIncludes?: string | RegExp) {
+  /**
+   * 
+   * @param ErrorClass 
+   * @param messageIncludes 
+   */
+  public async throw(
+    ErrorClass?: IConstructor<Error>,
+    messageIncludes?: string | RegExp,
+  ) {
     try {
       await this.value();
       this.checkThrown(false, undefined, ErrorClass, messageIncludes);
@@ -13,7 +22,11 @@ export class AsyncFunctionAssertion extends FunctionAssertion {
     }
   }
 
-  public async throwWith(args: unknown[], ErrorClass?: IConstructor<Error>, messageIncludes?: string | RegExp) {
+  public async throwWith(
+    args: unknown[],
+    ErrorClass?: IConstructor<Error>,
+    messageIncludes?: string | RegExp,
+  ) {
     try {
       await this.value(...args);
       this.checkThrown(false, undefined, ErrorClass, messageIncludes);
@@ -26,14 +39,14 @@ export class AsyncFunctionAssertion extends FunctionAssertion {
   // }
 
   // public returnAsync<T extends IAssertion = any>(callback: (assertion: T) => void) {
-    
+
   // }
 
   // public returnWith<T extends IAssertion = any>(args: unknown[], callback: (assertion: T) => void) {
-    
+
   // }
 
   // public returnWithAsync<T extends IAssertion = any>(args: unknown[], callback: (assertion: T) => void) {
-    
+
   // }
 }

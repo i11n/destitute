@@ -1,7 +1,6 @@
 import { BaseAssertion } from "./BaseAssertion.ts";
 
 export class NumberAssertion extends BaseAssertion<number> {
-   
   /**
    * Asserts whether the test `value` being greater than `num`, is expected.
    * 

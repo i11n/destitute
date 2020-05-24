@@ -1,7 +1,7 @@
-import { AssertThat } from "../mod.ts";
-import { StringAssertion } from "./StringAssertion.ts";
+import { Destitute } from "../mod.ts";
 
-const assertThat = (value: string) => AssertThat<StringAssertion>(value);
+const assertThat = (value: string) =>
+  Destitute.AssertThat<Destitute.Assertions.StringAssertion>(value);
 
 Deno.test("StringAssertion - match", () => {
   assertThat("Hello world").does.match(/\s/);

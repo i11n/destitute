@@ -1,7 +1,7 @@
-import { AssertThat } from "../AssertThat.ts";
-import { NumberAssertion } from "./NumberAssertion.ts";
+import { Destitute } from "../mod.ts";
 
-const assertThat = (value: number) => AssertThat<NumberAssertion>(value);
+const assertThat = (value: number) =>
+  Destitute.AssertThat<Destitute.Assertions.NumberAssertion>(value);
 
 Deno.test("NumberAssertion - gt(num)", () => {
   assertThat(25).is.gt(12);

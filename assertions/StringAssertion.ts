@@ -1,7 +1,6 @@
 import { BaseAssertion } from "./BaseAssertion.ts";
 
 export class StringAssertion extends BaseAssertion<string> {
-  
   /**
    * Asserts whether the test `value` matching the regular expression `regex`, is expected.
    */
@@ -40,7 +39,7 @@ export class StringAssertion extends BaseAssertion<string> {
       `${this.expectString} to have a length of "${num}".`,
     );
   }
-  
+
   /**
    * Asserts whether the test `value` appearing before `str` alphabetically, is expected.
    * 
@@ -50,9 +49,9 @@ export class StringAssertion extends BaseAssertion<string> {
     this.assert(
       (this.value < str) === this.assertTrue,
       `${this.expectString} to be before "${str}.`,
-    )
+    );
   }
-  
+
   /**
    * Asserts whether the test `value` appearing after `str` alphabetically, is expected.
    * 
@@ -62,6 +61,6 @@ export class StringAssertion extends BaseAssertion<string> {
     this.assert(
       (this.value > str) === this.assertTrue,
       `${this.expectString} to be before "${str}.`,
-    )
+    );
   }
 }

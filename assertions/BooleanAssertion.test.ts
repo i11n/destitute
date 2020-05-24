@@ -1,7 +1,7 @@
-import { AssertThat } from "../mod.ts";
-import { BooleanAssertion } from "./BooleanAssertion.ts";
+import { Destitute } from "../mod.ts";
 
-const assertThat = (value: boolean) => AssertThat<BooleanAssertion>(value);
+const assertThat = (value: boolean) =>
+  Destitute.AssertThat<Destitute.Assertions.BooleanAssertion>(value);
 
 Deno.test("BooleanAssertion - true", () => {
   assertThat(true).is.true();

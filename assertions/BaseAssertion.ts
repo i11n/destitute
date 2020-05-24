@@ -1,8 +1,9 @@
-import { equal } from "https://deno.land/std/testing/asserts.ts";
-import { AssertionError } from "../AssertionError.ts";
-import { IAssertion, IAssertionData } from "../types.ts";
+import { assertEquals } from "../deps.ts";
+import { AssertionException } from "../exceptions/AssertionException.ts";
+import { IExceptionData } from "../exceptions/IExceptionData.ts";
+import { IConstructor } from "../util/types.ts";
 
-export class BaseAssertion<V = any> implements IAssertion {
+export class BaseAssertion<V = any> {
   protected _value: V;
 
   protected _assertTrue: boolean = true;
@@ -22,10 +23,18 @@ export class BaseAssertion<V = any> implements IAssertion {
   }
 
   /**
-   * Returns the leading string of the message for an AssertionError.
+   * Returns the leading string of the message for an AssertionException.
    */
   protected get expectString(): string {
-    return `Expected "${this.value}" ${this.assertTrue ? "" : "NOT"}`;
+    if (typeof this.value === "object" && !!this.value) {
+      return `Expected "${(this.value as Object).constructor.name}"${this.assertTrue ? "" : " NOT"}`;
+    }
+
+    if (typeof this.value === "function") {
+      return `Expected "function ${this.value.name}(){[omitted]}"${this.assertTrue ? "" : " NOT"}`;
+    }
+
+    return `Expected "${this.value}"${this.assertTrue ? "" : " NOT"}`;
   }
 
   /**
@@ -33,8 +42,8 @@ export class BaseAssertion<V = any> implements IAssertion {
    * 
    * @param value The value to assert.
    */
-  constructor(value: V) {
-    this._value = value;
+  constructor(value?: V) {
+    this._value = value as V;
   }
 
   /**
@@ -43,12 +52,16 @@ export class BaseAssertion<V = any> implements IAssertion {
    * 
    * @param assertion The result of an assertion.
    * @param message The message to through it the assertion is `false`.
-   * @param data Any additional data to provide to the AssertionError, if thrown.
+   * @param data Any additional data to provide to the AssertionException, if thrown.
    */
-  protected assert(assertion: boolean, message: string, data?: IAssertionData) {
+  protected assert(assertion: boolean, message: string, data?: IExceptionData) {
     if (!assertion) {
-      throw new AssertionError(message, data);
+      this.fail(message, data);
     }
+  }
+
+  protected fail(message: string, data?: IExceptionData) {
+    throw new AssertionException(message, data);
   }
 
   /**
@@ -192,7 +205,7 @@ export class BaseAssertion<V = any> implements IAssertion {
   public exists() {
     this.assert(
       (this.value !== undefined && this.value !== null) === this.assertTrue,
-      `${this.expectString} to be "defined".`,
+      `${this.expectString} to be a value other than "undefined" or "null".`,
     );
   }
 
@@ -218,10 +231,26 @@ export class BaseAssertion<V = any> implements IAssertion {
    * Asserts whether the test `value` being equal to `expected`, is expected.
    */
   public equalTo(expected: unknown) {
-    this.assert(
-      equal(this.value, expected) === this.assertTrue,
-      `${this.expectString} to equal "${expected}".`,
-    );
+    let expectedValue = `${expected}`;
+    
+    if (typeof expected === "object" && !!expected) {
+      expectedValue =  (expected as Object).constructor.name;
+    }
+
+    if (typeof expected === "function") {
+      expectedValue = `function() ${expected.name}{[omitted]}`;
+    }
+
+    try {
+      assertEquals(this.value, expected);
+    } catch (e) {
+      if (this.assertTrue) {
+        this.fail(`${this.expectString} to equal "${expectedValue}". ${e.message}`);
+      }
+    }
+    if (!this.assertTrue) {
+      this.fail(`${this.expectString} to equal "${expected}".`);
+    }
   }
 
   /**
@@ -232,12 +261,15 @@ export class BaseAssertion<V = any> implements IAssertion {
    * @param callbacks The assertion callback to test.
    */
   public meetsAll(...callbacks: ((assertable: this) => void)[]) {
+    const ctor = this.constructor as IConstructor<this>;
+    
     for (let i = 0; i < callbacks.length; i++) {
       try {
-        callbacks[i](this);
+        callbacks[i](new ctor(this.value));
       } catch (e) {
-        throw new AssertionError(
-          `${this.expectString} to meet all assertions. Failed on assertion ${i + 1} with message: ${e.message}`,
+        throw new AssertionException(
+          `${this.expectString} to meet all assertions. Failed on assertion ${i +
+            1} with message: ${e.message}`,
         );
       }
     }
@@ -252,10 +284,11 @@ export class BaseAssertion<V = any> implements IAssertion {
    */
   public meetsAny(...callbacks: ((assertable: this) => void)[]) {
     let foundOne = false;
+    const ctor = this.constructor as IConstructor<this>;
 
     for (let i = 0; i < callbacks.length; i++) {
       try {
-        callbacks[i](this);
+        callbacks[i](new ctor(this.value));
 
         foundOne = true;
 
@@ -266,7 +299,7 @@ export class BaseAssertion<V = any> implements IAssertion {
     }
 
     if (!foundOne) {
-      throw new AssertionError(
+      throw new AssertionException(
         `${this.expectString} to meet at least one assertion.`,
       );
     }

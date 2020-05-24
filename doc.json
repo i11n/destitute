@@ -1,0 +1,402 @@
+[
+  {
+    "kind": "namespace",
+    "name": "Destitute",
+    "location": {
+      "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+      "line": 7,
+      "col": 0
+    },
+    "jsDoc": null,
+    "namespaceDef": {
+      "elements": [
+        {
+          "kind": "variable",
+          "name": "version",
+          "location": {
+            "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+            "line": 8,
+            "col": 2
+          },
+          "jsDoc": null,
+          "variableDef": {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "kind": "const"
+          }
+        },
+        {
+          "kind": "variable",
+          "name": "AssertThat",
+          "location": {
+            "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+            "line": 10,
+            "col": 2
+          },
+          "jsDoc": null,
+          "variableDef": {
+            "tsType": null,
+            "kind": "const"
+          }
+        },
+        {
+          "kind": "namespace",
+          "name": "Exceptions",
+          "location": {
+            "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+            "line": 12,
+            "col": 2
+          },
+          "jsDoc": null,
+          "namespaceDef": {
+            "elements": [
+              {
+                "kind": "class",
+                "name": "AssertionException",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 13,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": "BaseAssertionException",
+                  "implements": [],
+                  "typeParams": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "namespace",
+          "name": "AssertionRouter",
+          "location": {
+            "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+            "line": 16,
+            "col": 2
+          },
+          "jsDoc": null,
+          "namespaceDef": {
+            "elements": [
+              {
+                "kind": "variable",
+                "name": "addRoute",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 17,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "variableDef": {
+                  "tsType": null,
+                  "kind": "const"
+                }
+              },
+              {
+                "kind": "variable",
+                "name": "setRoute",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 18,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "variableDef": {
+                  "tsType": null,
+                  "kind": "const"
+                }
+              },
+              {
+                "kind": "variable",
+                "name": "matchRoute",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 19,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "variableDef": {
+                  "tsType": null,
+                  "kind": "const"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "namespace",
+          "name": "Assertions",
+          "location": {
+            "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+            "line": 22,
+            "col": 2
+          },
+          "jsDoc": null,
+          "namespaceDef": {
+            "elements": [
+              {
+                "kind": "class",
+                "name": "ArrayAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 23,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": [
+                    {
+                      "name": "T",
+                      "default": {
+                        "repr": "any",
+                        "kind": "keyword",
+                        "keyword": "any"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "class",
+                "name": "AsyncFunctionAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 25,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              },
+              {
+                "kind": "class",
+                "name": "BaseAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 27,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              },
+              {
+                "kind": "class",
+                "name": "BooleanAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 28,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              },
+              {
+                "kind": "class",
+                "name": "FunctionAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 29,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              },
+              {
+                "kind": "class",
+                "name": "FunctionSpyAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 30,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              },
+              {
+                "kind": "class",
+                "name": "MapAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 32,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              },
+              {
+                "kind": "class",
+                "name": "NumberAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 33,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              },
+              {
+                "kind": "class",
+                "name": "ObjectAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 34,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              },
+              {
+                "kind": "class",
+                "name": "SetAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 35,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              },
+              {
+                "kind": "class",
+                "name": "StringAssertion",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 36,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": null,
+                  "implements": [],
+                  "typeParams": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "namespace",
+          "name": "Util",
+          "location": {
+            "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+            "line": 39,
+            "col": 2
+          },
+          "jsDoc": null,
+          "namespaceDef": {
+            "elements": [
+              {
+                "kind": "class",
+                "name": "FunctionSpy",
+                "location": {
+                  "filename": "file:///C:/Users/ebentley/Documents/GitHub/assert-that/mod.ts",
+                  "line": 40,
+                  "col": 4
+                },
+                "jsDoc": null,
+                "classDef": {
+                  "isAbstract": false,
+                  "constructors": [],
+                  "properties": [],
+                  "methods": [],
+                  "extends": "BaseFunctionSpy",
+                  "implements": [],
+                  "typeParams": []
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]
